@@ -8,6 +8,7 @@ public enum CBORError : Error {
     case wrongTypeInsideSequence
     case tooLongSequence
     case incorrectUTF8String
+    case maximumDepthExceeded
 }
 
 extension CBOR {
@@ -19,6 +20,7 @@ extension CBOR {
 public class CBORDecoder {
     private var istream : CBORInputStream
     public var options: CBOROptions
+    private var currentDepth = 0
 
     public init(stream: CBORInputStream, options: CBOROptions = CBOROptions()) {
         self.istream = stream
@@ -109,6 +111,11 @@ public class CBORDecoder {
     }
 
     public func decodeItem() throws -> CBOR? {
+        guard currentDepth <= options.maximumDepth
+        else { throw CBORError.maximumDepthExceeded }
+        
+        currentDepth += 1
+        defer { currentDepth -= 1 }
         let b = try istream.popByte()
 
         switch b {
