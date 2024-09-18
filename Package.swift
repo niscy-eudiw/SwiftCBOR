@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:6.0
 
 import PackageDescription
 
@@ -9,7 +9,7 @@ let package = Package(
 		.library(name: "SwiftCBOR", targets: ["SwiftCBOR"])
 	],
 	dependencies: [
-		.package(url: "https://github.com/apple/swift-collections.git", from: "1.0.6"),
+		.package(url: "https://github.com/apple/swift-collections.git", from: "1.1.3"),
 	],
 	targets: [
 		.target(name: "SwiftCBOR", dependencies: [.product(name: "Collections", package: "swift-collections")],
