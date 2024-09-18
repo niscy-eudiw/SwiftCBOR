@@ -133,7 +133,7 @@ public indirect enum CBOR : Equatable, Hashable,
         }
     }
 
-    public struct Tag: RawRepresentable, Equatable, Hashable {
+    public struct Tag: RawRepresentable, Hashable, Sendable {
         public let rawValue: UInt64
 
         public init(rawValue: UInt64) {
