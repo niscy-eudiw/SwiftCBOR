@@ -3,7 +3,7 @@ import Foundation
 #endif
 import OrderedCollections
 
-public indirect enum CBOR : Equatable, Hashable,
+public indirect enum CBOR : Equatable, Hashable, Sendable,
         ExpressibleByNilLiteral, ExpressibleByIntegerLiteral, ExpressibleByStringLiteral,
         ExpressibleByArrayLiteral, ExpressibleByDictionaryLiteral, ExpressibleByBooleanLiteral,
         ExpressibleByFloatLiteral {
