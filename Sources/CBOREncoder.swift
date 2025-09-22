@@ -265,7 +265,8 @@ extension CBOR {
         let (integral, fractional) = modf(timeInterval)
 
         let seconds = Int64(integral)
-        let nanoseconds = Int32(fractional * Double(NSEC_PER_SEC))
+        // The NSEC_PER_SEC value is 1,000,000,000 (one billion), representing the number of nanoseconds in one second.
+        let nanoseconds = Int32(fractional * Double(1_000_000_000))
 
         switch options.dateStrategy {
         case .annotatedMap:
