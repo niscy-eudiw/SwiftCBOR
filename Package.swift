@@ -9,7 +9,7 @@ let package = Package(
 		.library(name: "SwiftCBOR", targets: ["SwiftCBOR"])
 	],
 	dependencies: [
-		.package(url: "https://github.com/apple/swift-collections.git", from: "1.1.3"),
+		.package(url: "https://github.com/apple/swift-collections.git", from: "1.6.0"),
 	],
 	targets: [
 		.target(name: "SwiftCBOR", dependencies: [.product(name: "Collections", package: "swift-collections")],
