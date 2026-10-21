@@ -1,15 +1,15 @@
-// swift-tools-version:6.0
+// swift-tools-version:6.4
 
 import PackageDescription
 
 let package = Package(
 	name: "SwiftCBOR",
-	platforms: [.macOS(.v10_13), .iOS(.v13), .tvOS(.v13), .macCatalyst(.v13), .watchOS(.v8)],
+	platforms: [.macOS(.v15), .iOS(.v16), .tvOS(.v15), .macCatalyst(.v15), .watchOS(.v9)],
 	products: [
 		.library(name: "SwiftCBOR", targets: ["SwiftCBOR"])
 	],
 	dependencies: [
-		.package(url: "https://github.com/apple/swift-collections.git", from: "1.6.0"),
+		.package(url: "https://github.com/apple/swift-collections.git", from: "1.7.3"),
 	],
 	targets: [
 		.target(name: "SwiftCBOR", dependencies: [.product(name: "Collections", package: "swift-collections")],

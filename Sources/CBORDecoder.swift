@@ -9,6 +9,7 @@ public enum CBORError : Error {
     case tooLongSequence
     case incorrectUTF8String
     case maximumDepthExceeded
+    case duplicateMapKey
 }
 
 extension CBOR {
@@ -87,6 +88,9 @@ public class CBORDecoder {
         for _ in (0..<n) {
             guard let key  = try decodeItem() else { throw CBORError.unfinishedSequence }
             guard let val  = try decodeItem() else { throw CBORError.unfinishedSequence }
+            if options.rejectDuplicateMapKeys && result[key] != nil {
+                throw CBORError.duplicateMapKey
+            }
             result[key] = val
         }
         return result
@@ -102,6 +106,9 @@ public class CBORDecoder {
         while key != CBOR.break {
             guard let okey = key else { throw CBORError.unfinishedSequence }
             guard let oval = val else { throw CBORError.unfinishedSequence }
+            if options.rejectDuplicateMapKeys && result[okey] != nil {
+                throw CBORError.duplicateMapKey
+            }
             result[okey] = oval
             do { key = try decodeItem() } catch CBORError.unfinishedSequence { key = nil }
             guard (key != CBOR.break) else { break } // don't eat the val after the break!

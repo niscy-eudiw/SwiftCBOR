@@ -40,6 +40,18 @@ print(decoded)
 
 To unwrap the decoded `CBOR` values, use [PATTERN MATCHING](https://alisoftware.github.io/swift/pattern-matching/2016/05/16/pattern-matching-4/)!!
 
+To reject duplicate map keys, pass `CBOROptions(rejectDuplicateMapKeys: true)`
+to `CBOR.decode` or `CBORDecoder`. Both definite-length and indefinite-length
+maps, including nested maps, throw `CBORError.duplicateMapKey` before overwriting
+an existing key. Keys are compared as decoded `CBOR` values. The default is
+`false`, preserving the existing behavior of keeping the last value. This option
+applies to the raw CBOR decoder; `CodableCBORDecoder` has separate configuration.
+
+```swift
+let options = CBOROptions(rejectDuplicateMapKeys: true)
+let decoded = try CBOR.decode(bytes, options: options)
+```
+
 ## Encoding
 
 Encoding a value returns an array of bytes, `[UInt8]`. You can encode with `CBOR.encode(myValue)` or `myValue.encode()`. Any type that conforms to the `CBOREncodable` protocol may be encoded. You can implement the `CBOREncodable` protocol for your types and then encode as usual.
