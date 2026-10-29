@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
 	name: "SwiftCBOR",
-	platforms: [.macOS(.v15), .iOS(.v16), .tvOS(.v15), .macCatalyst(.v15), .watchOS(.v9)],
+	platforms: [.macOS(.v15), .iOS(.v15), .tvOS(.v15), .macCatalyst(.v15), .watchOS(.v9)],
 	products: [
 		.library(name: "SwiftCBOR", targets: ["SwiftCBOR"])
 	],
